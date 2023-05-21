@@ -1,6 +1,5 @@
+import 'package:advisory_assessment/Services/ApiCalls/api_calls.dart';
 import 'package:flutter/material.dart';
-
-import 'home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -44,31 +43,32 @@ class _LoginPageState extends State<LoginPage> {
                 String username = _usernameController.text;
                 String password = _passwordController.text;
                 // Perform login validation here
-                if (username == 'admin' && password == 'password') {
-                  // Navigate to the home page
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const HomePage(),
-                    ),
-                  );
-                } else {
-                  showDialog(
-                    context: context,
-                    builder: (context) => AlertDialog(
-                      title: const Text('Login Failed'),
-                      content: const Text('Invalid username or password'),
-                      actions: [
-                        TextButton(
-                          onPressed: () {
-                            Navigator.pop(context);
-                          },
-                          child: const Text('OK'),
-                        ),
-                      ],
-                    ),
-                  );
-                }
+                logIn(username, password);
+                // if (username == 'admin' && password == 'password') {
+                //   // Navigate to the home page
+                //   Navigator.pushReplacement(
+                //     context,
+                //     MaterialPageRoute(
+                //       builder: (context) => const HomePage(),
+                //     ),
+                //   );
+                // } else {
+                //   showDialog(
+                //     context: context,
+                //     builder: (context) => AlertDialog(
+                //       title: const Text('Login Failed'),
+                //       content: const Text('Invalid username or password'),
+                //       actions: [
+                //         TextButton(
+                //           onPressed: () {
+                //             Navigator.pop(context);
+                //           },
+                //           child: const Text('OK'),
+                //         ),
+                //       ],
+                //     ),
+                //   );
+                // }
               },
               child: const Text('Login'),
             ),
