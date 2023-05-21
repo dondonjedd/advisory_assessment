@@ -19,8 +19,6 @@ class _LoginPageState extends ConsumerState<LoginPage> {
     setState(() {
       _isLoading = true;
     });
-
-    await Future.delayed(const Duration(seconds: 3));
     await ref.read(loginProvider.notifier).logIn(_usernameController.text, _passwordController.text);
     setState(() {
       _isLoading = false;

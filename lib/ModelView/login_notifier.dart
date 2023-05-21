@@ -25,6 +25,10 @@ class LoginNotifier extends StateNotifier<UserAuth> {
       throw 'An error occurred: $error';
     }
   }
+
+  void logOut() {
+    state = UserAuth(id: '', password: '', token: '', username: '');
+  }
 }
 
 final loginProvider = StateNotifierProvider<LoginNotifier, UserAuth>((ref) => LoginNotifier());
