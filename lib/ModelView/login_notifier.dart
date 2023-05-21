@@ -9,8 +9,8 @@ import '../Services/Helpers/enums.dart';
 // final loginProvider = Provider.autoDispose((ref) => LoginNotifier());
 const storage = FlutterSecureStorage();
 
-class LoginNotifier extends StateNotifier<UserAuth> {
-  LoginNotifier() : super(UserAuth());
+class UserAuthNotifier extends StateNotifier<UserAuth> {
+  UserAuthNotifier() : super(UserAuth());
 
   Future<void> logIn(String username, String password) async {
     try {
@@ -52,4 +52,4 @@ class LoginNotifier extends StateNotifier<UserAuth> {
   }
 }
 
-final loginProvider = StateNotifierProvider<LoginNotifier, UserAuth>((ref) => LoginNotifier());
+final loginProvider = StateNotifierProvider<UserAuthNotifier, UserAuth>((ref) => UserAuthNotifier());
