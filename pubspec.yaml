@@ -37,6 +37,7 @@ dependencies:
   flutter_riverpod: ^2.3.6
   http: ^0.13.6
   flutter_secure_storage: ^8.0.0
+  shimmer: ^3.0.0
 
 dev_dependencies:
   flutter_test:
