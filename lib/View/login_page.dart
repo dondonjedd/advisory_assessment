@@ -1,16 +1,22 @@
-import 'package:advisory_assessment/Services/ApiCalls/api_calls.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class LoginPage extends StatefulWidget {
+import '../ModelView/login_notifier.dart';
+
+class LoginPage extends ConsumerStatefulWidget {
   const LoginPage({super.key});
 
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+
+  void _login() {
+    ref.read(loginProvider.notifier).logIn(_usernameController.text, _passwordController.text);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -39,37 +45,7 @@ class _LoginPageState extends State<LoginPage> {
             ),
             const SizedBox(height: 32.0),
             ElevatedButton(
-              onPressed: () {
-                String username = _usernameController.text;
-                String password = _passwordController.text;
-                // Perform login validation here
-                logIn(username, password);
-                // if (username == 'admin' && password == 'password') {
-                //   // Navigate to the home page
-                //   Navigator.pushReplacement(
-                //     context,
-                //     MaterialPageRoute(
-                //       builder: (context) => const HomePage(),
-                //     ),
-                //   );
-                // } else {
-                //   showDialog(
-                //     context: context,
-                //     builder: (context) => AlertDialog(
-                //       title: const Text('Login Failed'),
-                //       content: const Text('Invalid username or password'),
-                //       actions: [
-                //         TextButton(
-                //           onPressed: () {
-                //             Navigator.pop(context);
-                //           },
-                //           child: const Text('OK'),
-                //         ),
-                //       ],
-                //     ),
-                //   );
-                // }
-              },
+              onPressed: _login,
               child: const Text('Login'),
             ),
           ],
