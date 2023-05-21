@@ -13,9 +13,18 @@ class LoginPage extends ConsumerStatefulWidget {
 class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
+  bool _isLoading = false;
 
-  void _login() {
-    ref.read(loginProvider.notifier).logIn(_usernameController.text, _passwordController.text);
+  Future<void> _login() async {
+    setState(() {
+      _isLoading = true;
+    });
+
+    await Future.delayed(const Duration(seconds: 3));
+    await ref.read(loginProvider.notifier).logIn(_usernameController.text, _passwordController.text);
+    setState(() {
+      _isLoading = false;
+    });
   }
 
   @override
@@ -44,10 +53,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
               ),
             ),
             const SizedBox(height: 32.0),
-            ElevatedButton(
-              onPressed: _login,
-              child: const Text('Login'),
-            ),
+            _isLoading
+                ? const CircularProgressIndicator()
+                : ElevatedButton(
+                    onPressed: _login,
+                    child: const Text('Login'),
+                  ),
           ],
         ),
       ),
