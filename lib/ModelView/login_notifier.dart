@@ -39,10 +39,6 @@ class UserAuthNotifier extends StateNotifier<UserAuth> {
   }
 
   void autoLogin() async {
-    const storage = FlutterSecureStorage();
-
-    debugPrint('Login successful!');
-
     String? token = await storage.read(key: SecureStorage.token.toString());
     String? id = await storage.read(key: SecureStorage.id.toString());
 
