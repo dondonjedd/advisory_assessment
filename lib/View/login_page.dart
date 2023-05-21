@@ -15,6 +15,12 @@ class _LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   bool _isLoading = false;
 
+  @override
+  void initState() {
+    super.initState();
+    ref.read(loginProvider.notifier).autoLogin();
+  }
+
   Future<void> _login() async {
     setState(() {
       _isLoading = true;
