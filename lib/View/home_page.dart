@@ -74,7 +74,7 @@ class _HomePageState extends ConsumerState<HomePage> {
                     onTap: () {
                       ScaffoldMessenger.of(context).hideCurrentSnackBar();
                       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        backgroundColor: Theme.of(context).colorScheme.primary,
+                        backgroundColor: Theme.of(context).colorScheme.primary.withOpacity(0.5),
                         content: Text(
                           textAlign: TextAlign.center,
                           "Distance to ${listings[index].listName} is\n${listings[index].distance} KM",
