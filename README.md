@@ -1,16 +1,12 @@
 # advisory_assessment
 
-A new Flutter project.
+Assessment Part B of Advisory Apps Sdn Bhd to test the candidate's skills
 
-## Getting Started
+## Requirements
 
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+-      User can login into application
+-      Keep the application logged in until user pressed logout (even after the application closed)
+-      Retrieve information from web service and display information into List View or SingleChildScrollView
+-      A toast containing list_name and distance should appeared when user click list item
+-      Shown below is webservice used in application.
+-      Include Facebook Login integration by displaying User’s email, Profile Picture. (with tester account provided)
