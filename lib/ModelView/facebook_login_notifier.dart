@@ -8,8 +8,8 @@ import '../Services/Helpers/enums.dart';
 // final loginProvider = Provider.autoDispose((ref) => LoginNotifier());
 const storage = FlutterSecureStorage();
 
-class UserAuthNotifier extends StateNotifier<UserAuth> {
-  UserAuthNotifier() : super(UserAuth());
+class FacebookAuthNotifier extends StateNotifier<UserAuth> {
+  FacebookAuthNotifier() : super(UserAuth());
 
   Future<void> logIn() async {
     try {
@@ -19,8 +19,8 @@ class UserAuthNotifier extends StateNotifier<UserAuth> {
         // you are logged
         final AccessToken accessToken = response.accessToken!;
         state = UserAuth(id: accessToken.userId, token: accessToken.token, username: "");
-        storage.write(key: SecureStorage.token.toString(), value: state.token);
-        storage.write(key: SecureStorage.id.toString(), value: state.id);
+        storage.write(key: SecureStorage.facebookToken.toString(), value: state.token);
+        storage.write(key: SecureStorage.facebookId.toString(), value: state.id);
       } else {
         throw 'Login failed: ${response.status} - ${response.message}';
       }
@@ -32,9 +32,10 @@ class UserAuthNotifier extends StateNotifier<UserAuth> {
 
   void logOut() async {
     await FacebookAuth.instance.logOut();
-    storage.write(key: SecureStorage.token.toString(), value: '');
-    storage.write(key: SecureStorage.id.toString(), value: '');
+    state = UserAuth(token: '', id: '', password: '', username: '');
+    storage.write(key: SecureStorage.facebookToken.toString(), value: '');
+    storage.write(key: SecureStorage.facebookId.toString(), value: '');
   }
 }
 
-final facebookLoginProvider = StateNotifierProvider<UserAuthNotifier, UserAuth>((ref) => UserAuthNotifier());
+final facebookLoginProvider = StateNotifierProvider<FacebookAuthNotifier, UserAuth>((ref) => FacebookAuthNotifier());

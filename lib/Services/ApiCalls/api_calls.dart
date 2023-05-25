@@ -30,3 +30,8 @@ Future<LoginResult> logInFacebookApiCall() async {
   final LoginResult result = await FacebookAuth.instance.login();
   return result;
 }
+
+Future<Map<String, dynamic>> getUserDataFacebookApiCall() async {
+  final Map<String, dynamic> result = await FacebookAuth.instance.getUserData();
+  return result;
+}

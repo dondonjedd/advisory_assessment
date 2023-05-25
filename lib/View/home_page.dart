@@ -47,7 +47,7 @@ class _HomePageState extends ConsumerState<HomePage> {
     final listings = ref.watch(listingProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Home'),
+        title: const Text('Advisory'),
         actions: [IconButton(onPressed: logout, icon: const Icon(Icons.logout))],
       ),
       body: _isLoading

@@ -1,3 +1,3 @@
 enum Method { get, post }
 
-enum SecureStorage { token, id }
+enum SecureStorage { token, id, facebookToken, facebookId }
