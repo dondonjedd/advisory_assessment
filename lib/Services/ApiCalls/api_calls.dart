@@ -2,6 +2,7 @@ import 'package:advisory_assessment/Services/Helpers/api_call_helpers.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 import '../Helpers/enums.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 
 const baseUrl = "http://interview.advisoryapps.com";
 
@@ -23,4 +24,9 @@ Future<http.Response> logInApiCall(String email, String password) async {
 Future<http.Response> getListingApiCall() async {
   http.Response response = await callAPI(url: "$baseUrl/index.php/listing", method: Method.get, apiName: "GetListings", queryParams: {"token": await token(), "id": await id()});
   return response;
+}
+
+Future<LoginResult> logInFacebookApiCall() async {
+  final LoginResult result = await FacebookAuth.instance.login();
+  return result;
 }

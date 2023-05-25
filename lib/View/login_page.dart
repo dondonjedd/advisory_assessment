@@ -1,3 +1,4 @@
+import 'package:advisory_assessment/ModelView/facebook_login_notifier.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -13,7 +14,8 @@ class LoginPage extends ConsumerStatefulWidget {
 class LoginPageState extends ConsumerState<LoginPage> {
   final TextEditingController _usernameController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  bool _isLoading = false;
+  bool _isLoginLoading = false;
+  bool _isFBLoginLoading = false;
 
   @override
   void initState() {
@@ -23,11 +25,32 @@ class LoginPageState extends ConsumerState<LoginPage> {
 
   Future<void> _login() async {
     setState(() {
-      _isLoading = true;
+      _isLoginLoading = true;
     });
     await ref.read(loginProvider.notifier).logIn(_usernameController.text, _passwordController.text);
     setState(() {
-      _isLoading = false;
+      _isLoginLoading = false;
+    });
+  }
+
+  Future<void> _facebookLogin() async {
+    setState(() {
+      _isFBLoginLoading = true;
+    });
+    try {
+      await ref.read(facebookLoginProvider.notifier).logIn();
+    } catch (error) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(
+          error.toString(),
+          style: const TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.red,
+      ));
+    }
+
+    setState(() {
+      _isFBLoginLoading = false;
     });
   }
 
@@ -57,11 +80,18 @@ class LoginPageState extends ConsumerState<LoginPage> {
               ),
             ),
             const SizedBox(height: 32.0),
-            _isLoading
+            _isLoginLoading
                 ? const CircularProgressIndicator()
                 : ElevatedButton(
                     onPressed: _login,
                     child: const Text('Login'),
+                  ),
+            const SizedBox(height: 32.0),
+            _isFBLoginLoading
+                ? const CircularProgressIndicator()
+                : ElevatedButton(
+                    onPressed: _facebookLogin,
+                    child: const Text('Login with facebook'),
                   ),
           ],
         ),
